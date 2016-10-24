@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create New Course</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style media="screen">
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon>i {
+            position: absolute;
+            display: block;
+            transform: translate(0, -50%);
+            top: 50%;
+            pointer-events: none;
+            width: 25px;
+            text-align: center;
+            font-style: normal;
+        }
+
+        .input-icon>input {
+            padding-left: 25px;
+            padding-right: 0;
+        }
+
+        input, button, textarea, ul, li, select {
+            width: 100%;
+            padding: 8px;
+        }
+        div {
+            margin-top: : 6px;
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+            <form class="form-inline" action="{% url 'course:createNewCourse' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h2><strong>Create New Course</strong></h2><br/>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <input type="text" name="courseName" placeholder="Course Name" required>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <select class="dropdown" name="courseCategory" required>
+                        <option value="">Choose Category</option>
+                        <option value="1">Computer</option>
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <textarea name="courseDesc" rows="10" placeholder="Course Description" required></textarea>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <input type="file" name="courseVideo" required/>
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="input-icon">
+                        <i>฿</i>
+                        <input type="number" min="1" step="any" name="coursePrice" placeholder="Course Price" required>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <button type="submit" name="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+    </div>
+</body>
+
+</html>

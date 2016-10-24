@@ -1,0 +1,41 @@
+#   A basic travis.yml boilerplate for Django projects
+#
+#   The set-up assumes a postgreSQL database.
+#
+#   Replace the following variables in the code:
+# * your_project_settings
+# * your_github_username
+# * your_repo
+
+language: python
+sudo: false
+python:
+  - "3.5"
+cache:
+  directories:
+    - $HOME/.cache/pip
+
+env:
+  - DJANGO=1.10.1 DB_ENGINE="django.db.backends.mysql" DB_NAME="test_project" DB_USER="travis"
+
+branches:
+  only:
+    - master
+
+services:
+    - mysql
+
+matrix:
+    fast_finish: true
+
+install:
+  - pip install -r dev-requirements.txt
+
+before_script:
+  - if [[ "$DB_ENGINE" == "django.db.backends.mysql" ]] ; then mysql -e 'create database test_project'; fi
+
+script:
+    - python manage.py test
+
+notifications:
+    email: false
